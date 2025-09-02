@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Estates | Virtual Reality Property Tours</title>
+    <style>
+        /* Global Styles */
+        :root {
+            --primary: #FF6347;
+            --dark: #333;
+            --light: #f9f9f9;
+            --gray: #777;
+            --white: #fff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://placehold.co/1200x600/333/white?text=Premium+Properties') no-repeat center center/cover;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+        }
+        
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--white);
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: opacity 0.3s;
+        }
+        
+        .btn:hover {
+            opacity: 0.9;
+        }
+        
+        /* VR Experience Section */
+        .vr-section {
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+        }
+        
+        .vr-container {
+            margin: 40px 0;
+            position: relative;
+            height: 500px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        #vr-viewer {
+            width: 100%;
+            height: 100%;
+            background: #000;
+        }
+        
+        .vr-controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 15px;
+        }
+        
+        .room-selector {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 30px 0;
+        }
+        
+        .room-btn {
+            background: var(--white);
+            border: 2px solid var(--primary);
+            padding: 8px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .room-btn.active {
+            background: var(--primary);
+            color: var(--white);
+        }
+        
+        /* Floor Plan Section */
+        .floor-plan-section {
+            padding: 80px 0;
+            background: var(--white);
+        }
+        
+        .floor-plan-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .floor-plan-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .floor-plan-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .floor-plan-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .property-details {
+            margin-bottom: 30px;
+        }
+        
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        /* Properties Section */
+        .properties-section {
+            padding: 80px 0;
+        }
+        
+        .properties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .property-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .property-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .property-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .property-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .property-card:hover .property-image img {
+            transform: scale(1.1);
+        }
+        
+        .property-info {
+            padding: 20px;
+        }
+        
+        .property-info h3 {
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .property-price {
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .property-features {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            color: var(--gray);
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            padding: 80px 0;
+            background: var(--white);
+        }
+        
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .contact-info h3 {
+            margin-bottom: 20px;
+        }
+        
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: var(--white);
+        }
+        
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: var(--white);
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--primary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+        
+        .social-icon:hover {
+            background: var(--primary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin-top: 20px;
+            }
+            
+            .nav-links li {
+                margin: 0 10px;
+            }
+            
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .vr-container {
+                height: 300px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">LuxuryEstates</a>
+                <ul class="nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#properties">Properties</a></li>
+                    <li><a href="#vr-tour">VR Tour</a></li>
+                    <li><a href="#floor-plan">Floor Plans</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Experience Properties in Virtual Reality</h1>
+                <p>Tour luxury homes from the comfort of your own space with our immersive VR technology</p>
+                <a href="#vr-tour" class="btn">Start VR Tour</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- VR Experience Section -->
+    <section id="vr-tour" class="vr-section">
+        <div class="container">
+            <h2 class="section-title">Virtual Reality Tour</h2>
+            <p>Explore this luxury property through our immersive VR experience. Navigate through different rooms and get a feel for the space.</p>
+            
+            <div class="vr-container">
+                <div id="vr-viewer">
+                    <!-- 3D viewer will be initialized here -->
+                    <div style="width:100%; height:100%; display:flex; justify-content:center; align-items:center; color:white; background:#222;">
+                        <div style="text-align:center;">
+                            <h3>3D VR Property Viewer</h3>
+                            <p>Interactive 3D model would load here</p>
+                            <p>Compatible with VR headsets</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="room-selector">
+                <div class="room-btn active" data-room="living">Living Room</div>
+                <div class="room-btn" data-room="kitchen">Kitchen</div>
+                <div class="room-btn" data-room="bedroom">Master Bedroom</div>
+                <div class="room-btn" data-room="bathroom">Bathroom</div>
+                <div class="room-btn" data-room="exterior">Exterior</div>
+            </div>
+            
+            <div class="vr-controls">
+                <button class="btn" id="vr-mode">Enter VR Mode</button>
+                <button class="btn" style="background: #444;" id="fullscreen">Fullscreen</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floor Plan Section -->
+    <section id="floor-plan" class="floor-plan-section">
+        <div class="container">
+            <h2 class="section-title">Property Floor Plan</h2>
+            <p>Interactive floor plan that updates as you navigate through the VR experience.</p>
+            
+            <div class="floor-plan-container">
+                <div class="floor-plan-image">
+                    <img src="https://placehold.co/600x400/eee/999?text=Interactive+Floor+Plan" alt="Property Floor Plan">
+                </div>
+                <div class="floor-plan-info">
+                    <div class="property-details">
+                        <h3>Modern Luxury Villa</h3>
+                        <p>Experience the elegance of this contemporary 4-bedroom villa with stunning views and premium finishes throughout.</p>
+                        
+                        <div class="detail-item">
+                            <span>Property Type:</span>
+                            <span>Single Family Home</span>
+                        </div>
+                        <div class="detail-item">
+                            <span>Bedrooms:</span>
+                            <span>4</span>
+                        </div>
+                        <div class="detail-item">
+                            <span>Bathrooms:</span>
+                            <span>3.5</span>
+                        </div>
+                        <div class="detail-item">
+                            <span>Square Footage:</span>
+                            <span>3,200 sq ft</span>
+                        </div>
+                        <div class="detail-item">
+                            <span>Year Built:</span>
+                            <span>2022</span>
+                        </div>
+                    </div>
+                    
+                    <a href="#contact" class="btn">Schedule a Tour</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Properties Section -->
+    <section id="properties" class="properties-section">
+        <div class="container">
+            <h2 class="section-title">Featured Properties</h2>
+            <p>Browse our selection of premium properties available with virtual tours.</p>
+            
+            <div class="properties-grid">
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://placehold.co/400x300/eee/999?text=Modern+Villa" alt="Modern Villa">
+                    </div>
+                    <div class="property-info">
+                        <h3>Modern Villa</h3>
+                        <div class="property-price">$1,250,000</div>
+                        <div class="property-features">
+                            <span>4 beds</span>
+                            <span>3 baths</span>
+                            <span>3,200 sq ft</span>
+                        </div>
+                        <p>Beautiful modern villa with panoramic views and smart home features.</p>
+                        <a href="#" class="btn" style="width:100%; text-align:center;">View Details</a>
+                    </div>
+                </div>
+                
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://placehold.co/400x300/eee/999?text=Luxury+Apartment" alt="Luxury Apartment">
+                    </div>
+                    <div class="property-info">
+                        <h3>Luxury Apartment</h3>
+                        <div class="property-price">$850,000</div>
+                        <div class="property-features">
+                            <span>3 beds</span>
+                            <span>2.5 baths</span>
+                            <span>1,800 sq ft</span>
+                        </div>
+                        <p>Spacious downtown apartment with premium amenities and concierge service.</p>
+                        <a href="#" class="btn" style="width:100%; text-align:center;">View Details</a>
+                    </div>
+                </div>
+                
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://placehold.co/400x300/eee/999?text=Country+Estate" alt="Country Estate">
+                    </div>
+                    <div class="property-info">
+                        <h3>Country Estate</h3>
+                        <div class="property-price">$2,300,000</div>
+                        <div class="property-features">
+                            <span>5 beds</span>
+                            <span>4.5 baths</span>
+                            <span>4,500 sq ft</span>
+                        </div>
+                        <p>Magnificent country estate on 5 acres with pool and guest house.</p>
+                        <a href="#" class="btn" style="width:100%; text-align:center;">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <p>Interested in a property or want to schedule a VR tour? Get in touch with our agents.</p>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Get In Touch</h3>
+                    
+                    <div class="contact-detail">
+                        <div class="contact-icon">📞</div>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>(555) 123-4567</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-detail">
+                        <div class="contact-icon">✉️</div>
+                        <div>
+                            <h4>Email</h4>
+                            <p>info@luxuryestates.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-detail">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <h4>Office</h4>
+                            <p>123 Premium Avenue, Luxury District, CA 90210</p>
+                        </div>
+                    </div>
+                    
+                    <div class="social-links">
+                        <a href="#" class="social-icon">f</a>
+                        <a href="#" class="social-icon">in</a>
+                        <a href="#" class="social-icon">ig</a>
+                        <a href="#" class="social-icon">tw</a>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3>Send a Message</h3>
+                    <form id="inquiry-form">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" class="form-control">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="property">Property Interest</label>
+                            <select id="property" class="form-control">
+                                <option value="">Select a property</option>
+                                <option value="modern-villa">Modern Villa</option>
+                                <option value="luxury-apartment">Luxury Apartment</option>
+                                <option value="country-estate">Country Estate</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" class="form-control" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn">Submit Inquiry</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>LuxuryEstates</h3>
+                    <p>Premium real estate services with cutting-edge VR technology for the modern home buyer.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#properties">Properties</a></li>
+                        <li><a href="#vr-tour">VR Tours</a></li>
+                        <li><a href="#floor-plan">Floor Plans</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Properties</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Modern Villa</a></li>
+                        <li><a href="#">Luxury Apartment</a></li>
+                        <li><a href="#">Country Estate</a></li>
+                        <li><a href="#">Waterfront Homes</a></li>
+                        <li><a href="#">Penthouse Collection</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Connect With Us</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-icon">f</a>
+                        <a href="#" class="social-icon">in</a>
+                        <a href="#" class="social-icon">ig</a>
+                        <a href="#" class="social-icon">tw</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 LuxuryEstates. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // VR Experience Simulation
+        document.addEventListener('DOMContentLoaded', function() {
+            const roomButtons = document.querySelectorAll('.room-btn');
+            const vrViewer = document.getElementById('vr-viewer');
+            const vrModeBtn = document.getElementById('vr-mode');
+            const fullscreenBtn = document.getElementById('fullscreen');
+            
+            // Room navigation
+            roomButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    roomButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const room = this.getAttribute('data-room');
+                    // In a real implementation, this would change the 3D view
+                    vrViewer.innerHTML = `
+                        <div style="width:100%; height:100%; display:flex; justify-content:center; align-items:center; color:white; background:#222;">
+                            <div style="text-align:center;">
+                                <h3>Viewing ${room.charAt(0).toUpperCase() + room.slice(1)}</h3>
+                                <p>3D model would change to show this room</p>
+                                <p>360° navigation available</p>
+                            </div>
+                        </div>
+                    `;
+                });
+            });
+            
+            // VR mode simulation
+            vrModeBtn.addEventListener('click', function() {
+                alert('VR mode would activate here. This would enable headset compatibility and immersive viewing.');
+            });
+            
+            // Fullscreen mode
+            fullscreenBtn.addEventListener('click', function() {
+                if (vrViewer.requestFullscreen) {
+                    vrViewer.requestFullscreen();
+                } else if (vrViewer.webkitRequestFullscreen) {
+                    vrViewer.webkitRequestFullscreen();
+                } else if (vrViewer.msRequestFullscreen) {
+                    vrViewer.msRequestFullscreen();
+                }
+            });
+            
+            // Form submission
+            const inquiryForm = document.getElementById('inquiry-form');
+            if (inquiryForm) {
+                inquiryForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Thank you for your inquiry! We will contact you shortly.');
+                    inquiryForm.reset();
+                });
+            }
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
