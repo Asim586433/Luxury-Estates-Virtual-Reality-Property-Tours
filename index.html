@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luxury Estates | Virtual Reality Property Tours</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Global Styles */
         :root {
@@ -55,6 +56,12 @@
             font-weight: bold;
             color: var(--primary);
             text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
         }
         
         .nav-links {
@@ -79,7 +86,7 @@
         
         /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://placehold.co/1200x600/333/white?text=Premium+Properties') no-repeat center center/cover;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
             height: 80vh;
             display: flex;
             align-items: center;
@@ -112,11 +119,13 @@
             text-decoration: none;
             font-size: 1rem;
             font-weight: bold;
-            transition: opacity 0.3s;
+            transition: all 0.3s;
         }
         
         .btn:hover {
             opacity: 0.9;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 99, 71, 0.4);
         }
         
         /* VR Experience Section */
@@ -257,6 +266,7 @@
         .property-image {
             height: 200px;
             overflow: hidden;
+            position: relative;
         }
         
         .property-image img {
@@ -445,6 +455,69 @@
             font-size: 0.9rem;
         }
         
+        /* Additional Elements */
+        .features {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 50px 0;
+        }
+        
+        .feature {
+            text-align: center;
+            max-width: 250px;
+            margin: 20px;
+        }
+        
+        .feature i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .testimonials {
+            background: var(--white);
+            padding: 80px 0;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .testimonial-card {
+            background: var(--light);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+        
+        .author-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
         /* Responsive Design */
         @media (max-width: 768px) {
             .navbar {
@@ -470,6 +543,11 @@
             .section-title {
                 font-size: 2rem;
             }
+            
+            .features {
+                flex-direction: column;
+                align-items: center;
+            }
         }
     </style>
 </head>
@@ -478,7 +556,7 @@
     <header>
         <div class="container">
             <nav class="navbar">
-                <a href="#" class="logo">LuxuryEstates</a>
+                <a href="#" class="logo"><i class="fas fa-home"></i>LuxuryEstates</a>
                 <ul class="nav-links">
                     <li><a href="#">Home</a></li>
                     <li><a href="#properties">Properties</a></li>
@@ -501,6 +579,30 @@
         </div>
     </section>
 
+    <!-- Features Section -->
+    <section class="features">
+        <div class="feature">
+            <i class="fas fa-vr-cardboard"></i>
+            <h3>VR Tours</h3>
+            <p>Immersive virtual reality property experiences</p>
+        </div>
+        <div class="feature">
+            <i class="fas fa-vector-square"></i>
+            <h3>Floor Plans</h3>
+            <p>Interactive and detailed floor plans</p>
+        </div>
+        <div class="feature">
+            <i class="fas fa-home"></i>
+            <h3>Premium Listings</h3>
+            <p>Exclusive luxury properties</p>
+        </div>
+        <div class="feature">
+            <i class="fas fa-headset"></i>
+            <h3>24/7 Support</h3>
+            <p>Dedicated customer service</p>
+        </div>
+    </section>
+
     <!-- VR Experience Section -->
     <section id="vr-tour" class="vr-section">
         <div class="container">
@@ -510,8 +612,8 @@
             <div class="vr-container">
                 <div id="vr-viewer">
                     <!-- 3D viewer will be initialized here -->
-                    <div style="width:100%; height:100%; display:flex; justify-content:center; align-items:center; color:white; background:#222;">
-                        <div style="text-align:center;">
+                    <div style="width:100%; height:100%; display:flex; justify-content:center; align-items:center; color:white; background:url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80') center center/cover;">
+                        <div style="text-align:center; background:rgba(0,0,0,0.7); padding: 20px; border-radius: 10px;">
                             <h3>3D VR Property Viewer</h3>
                             <p>Interactive 3D model would load here</p>
                             <p>Compatible with VR headsets</p>
@@ -521,16 +623,16 @@
             </div>
             
             <div class="room-selector">
-                <div class="room-btn active" data-room="living">Living Room</div>
-                <div class="room-btn" data-room="kitchen">Kitchen</div>
-                <div class="room-btn" data-room="bedroom">Master Bedroom</div>
-                <div class="room-btn" data-room="bathroom">Bathroom</div>
-                <div class="room-btn" data-room="exterior">Exterior</div>
+                <div class="room-btn active" data-room="living"><i class="fas fa-couch"></i> Living Room</div>
+                <div class="room-btn" data-room="kitchen"><i class="fas fa-utensils"></i> Kitchen</div>
+                <div class="room-btn" data-room="bedroom"><i class="fas fa-bed"></i> Master Bedroom</div>
+                <div class="room-btn" data-room="bathroom"><i class="fas fa-bath"></i> Bathroom</div>
+                <div class="room-btn" data-room="exterior"><i class="fas fa-tree"></i> Exterior</div>
             </div>
             
             <div class="vr-controls">
-                <button class="btn" id="vr-mode">Enter VR Mode</button>
-                <button class="btn" style="background: #444;" id="fullscreen">Fullscreen</button>
+                <button class="btn" id="vr-mode"><i class="fas fa-vr-cardboard"></i> Enter VR Mode</button>
+                <button class="btn" style="background: #444;" id="fullscreen"><i class="fas fa-expand"></i> Fullscreen</button>
             </div>
         </div>
     </section>
@@ -543,7 +645,7 @@
             
             <div class="floor-plan-container">
                 <div class="floor-plan-image">
-                    <img src="https://placehold.co/600x400/eee/999?text=Interactive+Floor+Plan" alt="Property Floor Plan">
+                    <img src="https://images.unsplash.com/photo-1588880331179-bc9b93a8cb5e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Property Floor Plan">
                 </div>
                 <div class="floor-plan-info">
                     <div class="property-details">
@@ -587,15 +689,15 @@
             <div class="properties-grid">
                 <div class="property-card">
                     <div class="property-image">
-                        <img src="https://placehold.co/400x300/eee/999?text=Modern+Villa" alt="Modern Villa">
+                        <img src="https://images.unsplash.com/photo-1605146769289-440113cc3d00?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Modern Villa">
                     </div>
                     <div class="property-info">
                         <h3>Modern Villa</h3>
                         <div class="property-price">$1,250,000</div>
                         <div class="property-features">
-                            <span>4 beds</span>
-                            <span>3 baths</span>
-                            <span>3,200 sq ft</span>
+                            <span><i class="fas fa-bed"></i> 4 beds</span>
+                            <span><i class="fas fa-bath"></i> 3 baths</span>
+                            <span><i class="fas fa-ruler-combined"></i> 3,200 sq ft</span>
                         </div>
                         <p>Beautiful modern villa with panoramic views and smart home features.</p>
                         <a href="#" class="btn" style="width:100%; text-align:center;">View Details</a>
@@ -604,15 +706,15 @@
                 
                 <div class="property-card">
                     <div class="property-image">
-                        <img src="https://placehold.co/400x300/eee/999?text=Luxury+Apartment" alt="Luxury Apartment">
+                        <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Luxury Apartment">
                     </div>
                     <div class="property-info">
                         <h3>Luxury Apartment</h3>
                         <div class="property-price">$850,000</div>
                         <div class="property-features">
-                            <span>3 beds</span>
-                            <span>2.5 baths</span>
-                            <span>1,800 sq ft</span>
+                            <span><i class="fas fa-bed"></i> 3 beds</span>
+                            <span><i class="fas fa-bath"></i> 2.5 baths</span>
+                            <span><i class="fas fa-ruler-combined"></i> 1,800 sq ft</span>
                         </div>
                         <p>Spacious downtown apartment with premium amenities and concierge service.</p>
                         <a href="#" class="btn" style="width:100%; text-align:center;">View Details</a>
@@ -621,18 +723,73 @@
                 
                 <div class="property-card">
                     <div class="property-image">
-                        <img src="https://placehold.co/400x300/eee/999?text=Country+Estate" alt="Country Estate">
+                        <img src="https://images.unsplash.com/photo-1575517111839-3a3843ee7f5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Country Estate">
                     </div>
                     <div class="property-info">
                         <h3>Country Estate</h3>
                         <div class="property-price">$2,300,000</div>
                         <div class="property-features">
-                            <span>5 beds</span>
-                            <span>4.5 baths</span>
-                            <span>4,500 sq ft</span>
+                            <span><i class="fas fa-bed"></i> 5 beds</span>
+                            <span><i class="fas fa-bath"></i> 4.5 baths</span>
+                            <span><i class="fas fa-ruler-combined"></i> 4,500 sq ft</span>
                         </div>
                         <p>Magnificent country estate on 5 acres with pool and guest house.</p>
                         <a href="#" class="btn" style="width:100%; text-align:center;">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">Client Testimonials</h2>
+            <p>See what our clients have to say about their experience with our VR property tours.</p>
+            
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "The VR tour allowed me to explore multiple properties without leaving my home. Saved me so much time and helped me find my dream house!"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="John Smith">
+                        </div>
+                        <div>
+                            <h4>John Smith</h4>
+                            <p>Software Engineer</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "As an international buyer, the VR tours were invaluable. I could thoroughly explore properties from another country before making a decision."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="Sarah Johnson">
+                        </div>
+                        <div>
+                            <h4>Sarah Johnson</h4>
+                            <p>Business Executive</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "The level of detail in the VR tours is amazing. I could see every corner of the property and it felt like I was actually there."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="Michael Chen">
+                        </div>
+                        <div>
+                            <h4>Michael Chen</h4>
+                            <p>Architect</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -650,7 +807,7 @@
                     <h3>Get In Touch</h3>
                     
                     <div class="contact-detail">
-                        <div class="contact-icon">📞</div>
+                        <div class="contact-icon"><i class="fas fa-phone"></i></div>
                         <div>
                             <h4>Phone</h4>
                             <p>(555) 123-4567</p>
@@ -658,7 +815,7 @@
                     </div>
                     
                     <div class="contact-detail">
-                        <div class="contact-icon">✉️</div>
+                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
                         <div>
                             <h4>Email</h4>
                             <p>info@luxuryestates.com</p>
@@ -666,7 +823,7 @@
                     </div>
                     
                     <div class="contact-detail">
-                        <div class="contact-icon">📍</div>
+                        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
                         <div>
                             <h4>Office</h4>
                             <p>123 Premium Avenue, Luxury District, CA 90210</p>
@@ -674,10 +831,10 @@
                     </div>
                     
                     <div class="social-links">
-                        <a href="#" class="social-icon">f</a>
-                        <a href="#" class="social-icon">in</a>
-                        <a href="#" class="social-icon">ig</a>
-                        <a href="#" class="social-icon">tw</a>
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
                 
@@ -756,10 +913,10 @@
                 <div class="footer-column">
                     <h3>Connect With Us</h3>
                     <div class="social-links">
-                        <a href="#" class="social-icon">f</a>
-                        <a href="#" class="social-icon">in</a>
-                        <a href="#" class="social-icon">ig</a>
-                        <a href="#" class="social-icon">tw</a>
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
             </div>
@@ -778,6 +935,15 @@
             const vrModeBtn = document.getElementById('vr-mode');
             const fullscreenBtn = document.getElementById('fullscreen');
             
+            // Room images for the VR viewer
+            const roomImages = {
+                living: "https://images.unsplash.com/photo-1540518614846-7eded433c457?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
+                kitchen: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
+                bedroom: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
+                bathroom: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
+                exterior: "https://images.unsplash.com/photo-1575517111839-3a3843ee7f5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80"
+            };
+            
             // Room navigation
             roomButtons.forEach(button => {
                 button.addEventListener('click', function() {
@@ -785,13 +951,13 @@
                     this.classList.add('active');
                     
                     const room = this.getAttribute('data-room');
-                    // In a real implementation, this would change the 3D view
+                    // Update the VR viewer with the room image
                     vrViewer.innerHTML = `
-                        <div style="width:100%; height:100%; display:flex; justify-content:center; align-items:center; color:white; background:#222;">
-                            <div style="text-align:center;">
-                                <h3>Viewing ${room.charAt(0).toUpperCase() + room.slice(1)}</h3>
-                                <p>3D model would change to show this room</p>
+                        <div style="width:100%; height:100%; display:flex; justify-content:center; align-items:center; color:white; background:url('${roomImages[room]}') center center/cover;">
+                            <div style="text-align:center; background:rgba(0,0,0,0.7); padding: 20px; border-radius: 10px;">
+                                <h3>${room.charAt(0).toUpperCase() + room.slice(1)} View</h3>
                                 <p>360° navigation available</p>
+                                <p>Use your mouse to look around</p>
                             </div>
                         </div>
                     `;
